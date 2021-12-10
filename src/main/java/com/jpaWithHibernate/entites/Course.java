@@ -5,22 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @ToString
 @Entity
-@NamedQuery(name = "find_all_persons", query = "select p from Person p")
-public class Person {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private int id;
+    private Long id;
     private String name;
-    private String location;
-    private Date birthDate;
 }

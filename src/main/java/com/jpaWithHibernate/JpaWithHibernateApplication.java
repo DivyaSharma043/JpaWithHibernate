@@ -2,8 +2,10 @@ package com.jpaWithHibernate;
 
 import com.jpaWithHibernate.entites.Course;
 import com.jpaWithHibernate.entites.Person;
+import com.jpaWithHibernate.entites.Review;
 import com.jpaWithHibernate.repository.CourseRepository;
 import com.jpaWithHibernate.repository.JpaRepository;
+import com.jpaWithHibernate.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class JpaWithHibernateApplication implements CommandLineRunner {
@@ -24,6 +29,9 @@ public class JpaWithHibernateApplication implements CommandLineRunner {
 
 	@Autowired
 	CourseRepository courseRepository;
+
+	@Autowired
+	StudentRepository studentRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpaWithHibernateApplication.class, args);
@@ -39,8 +47,17 @@ public class JpaWithHibernateApplication implements CommandLineRunner {
 		repository.delete(1002);
 
 //		Course
-		logger.info("User id 1 -> {}", courseRepository.findById(1L));
-//		courseRepository.deleteById(3L);
-		courseRepository.save(new Course(34L,"Jpa with hibernate"));
+//		logger.info("User id 1 -> {}", courseRepository.findById(1L));
+//		courseRepository.addHardCodedReviewsForCourse();
+
+		List<Review> reviews = new ArrayList<>();
+		Course course = courseRepository.findById(4L);
+		reviews.add(new Review(4008L,"0", "Very Poor",course ));
+		reviews.add(new Review(4009L,"6", "Superb",course ));
+		courseRepository.addReviewsForCourse(2L, reviews);
+
+//		Student
+		studentRepository.saveStudentWithPassport();
 	}
+
 }

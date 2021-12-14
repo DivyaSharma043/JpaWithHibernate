@@ -3,6 +3,8 @@ package com.jpaWithHibernate.entites;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -19,7 +21,7 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -32,9 +34,6 @@ public class Course {
 
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
-
-    public Course(long id, String react, Date localDateTime, Date localDateTime1, List<Review> reviews, List<Student> students) {
-    }
 
     public void addReviews(Review reviews) {
         this.reviews.add(reviews);

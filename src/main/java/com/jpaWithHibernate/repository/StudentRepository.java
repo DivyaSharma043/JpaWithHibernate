@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -18,10 +17,8 @@ import java.util.List;
 public class StudentRepository {
 
     @Autowired
-//    @PersistenceContext
     EntityManager entityManager;
-    private List<Course> course;
-    private Object LocalDateTime;
+    private List<Course> courses = new ArrayList<>();
 
     public Student findById(long id)
     {
@@ -54,19 +51,35 @@ public class StudentRepository {
         Passport passport = new Passport(3006L,"SDF345666KO", student);
         entityManager.persist(passport);
 
-        Student student1 = new Student(2006L,"Ram",passport, course);
+        Student student1 = new Student(2006L,"Ram",passport, courses);
         student1.setPassport(passport);
         entityManager.persist(student1);
     }
 
 
-//    public void insertHardCodeStudentAndCourse()
-//    {
-//        Passport passport = null;
-//        Student student = new Student(2007L, "Sourav", passport, course);
-//        List<Review> reviews = new ArrayList<>();
-//        List<Student> students = new ArrayList<>();
-//        Date localDateTime = new Date();
-//        Course course = new Course(6L, "React",localDateTime,localDateTime,reviews, students);
-//    }
+    public void insertHardCodeStudentAndCourse()
+    {
+        Passport passport = null;
+        Student student = new Student(2007L, "Sourav", passport , courses);
+        List<Review> reviews = new ArrayList<>();
+        List<Student> students = new ArrayList<>();
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        Course courses = new Course(7L, "React",now,now,reviews, students);
+        entityManager.persist(student);
+        entityManager.persist(courses);
+
+//        Relationship
+        student.addCourses(courses);
+        courses.addStudents(student);
+        entityManager.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student students, Course course)
+    {
+        students.addCourses(course);
+        course.addStudents(students);
+        entityManager.persist(students);
+        entityManager.persist(course);
+    }
+
 }

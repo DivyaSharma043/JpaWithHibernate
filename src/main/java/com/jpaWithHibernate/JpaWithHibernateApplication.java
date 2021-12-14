@@ -1,8 +1,6 @@
 package com.jpaWithHibernate;
 
-import com.jpaWithHibernate.entites.Course;
-import com.jpaWithHibernate.entites.Person;
-import com.jpaWithHibernate.entites.Review;
+import com.jpaWithHibernate.entites.*;
 import com.jpaWithHibernate.repository.CourseRepository;
 import com.jpaWithHibernate.repository.JpaRepository;
 import com.jpaWithHibernate.repository.StudentRepository;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -58,6 +55,13 @@ public class JpaWithHibernateApplication implements CommandLineRunner {
 
 //		Student
 		studentRepository.saveStudentWithPassport();
+		studentRepository.insertHardCodeStudentAndCourse();
+
+		Passport passport = null;
+		List<Course> courses = new ArrayList<>();
+		List<Student> students = new ArrayList<>();
+		LocalDateTime now = java.time.LocalDateTime.now();
+		studentRepository.insertStudentAndCourse(new Student(2008L, "Rajesh", passport , courses), new Course(8L, "C++",now,now,reviews, students));
 	}
 
 }

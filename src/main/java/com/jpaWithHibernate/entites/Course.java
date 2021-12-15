@@ -2,12 +2,12 @@ package com.jpaWithHibernate.entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+
+@NamedQueries(value = {
+        @NamedQuery(name = "query_get_all_courses",
+                query = "Select  c  From Course c"),
+        @NamedQuery(name = "query_get_all_courses_join_fetch",
+                query = "Select  c  From Course c JOIN FETCH c.students s") })
+
 @Entity
 public class Course {
 

@@ -50,6 +50,7 @@ public class Course {
     }
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     public void addStudents(Student students) {

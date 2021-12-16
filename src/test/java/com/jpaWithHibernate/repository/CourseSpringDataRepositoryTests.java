@@ -99,6 +99,12 @@ class CourseSpringDataRepositoryTests {
 		logger.info("third Page -> {}", thirdPage.getContent());
 	}
 
+	@Test
+	public void findByName()
+	{
+		logger.info("Find Course By Name -> {}", repository.findByName("JPA"));
+	}
+
 
 
 }

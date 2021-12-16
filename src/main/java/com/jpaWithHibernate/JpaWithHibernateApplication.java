@@ -1,16 +1,14 @@
 package com.jpaWithHibernate;
 
 import com.jpaWithHibernate.entites.*;
-import com.jpaWithHibernate.repository.CourseRepository;
-import com.jpaWithHibernate.repository.EmployeeRepository;
-import com.jpaWithHibernate.repository.JpaRepository;
-import com.jpaWithHibernate.repository.StudentRepository;
+import com.jpaWithHibernate.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,21 +17,22 @@ import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackageClasses = {CourseSpringDataRepository.class})
 public class JpaWithHibernateApplication implements CommandLineRunner {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	@Autowired
-	JpaRepository repository;
-
-	@Autowired
-	CourseRepository courseRepository;
-
-	@Autowired
-	StudentRepository studentRepository;
-
-	@Autowired
-	EmployeeRepository employeeRepository;
+//	private Logger logger = LoggerFactory.getLogger(this.getClass());
+//
+//	@Autowired
+//	JpaRepository repository;
+//
+//	@Autowired
+//	CourseRepository courseRepository;
+//
+//	@Autowired
+//	StudentRepository studentRepository;
+//
+//	@Autowired
+//	EmployeeRepository employeeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpaWithHibernateApplication.class, args);
@@ -69,12 +68,12 @@ public class JpaWithHibernateApplication implements CommandLineRunner {
 //		studentRepository.insertStudentAndCourse(new Student(2008L, "Rajesh", passport , courses), new Course(8L, "C++",now,now,reviews, students));
 
 
-		employeeRepository.insert(new FullTimeEmployee("Divya",new BigDecimal(900000)));
-		employeeRepository.insert(new PartTimeEmployee("Sham",new BigDecimal(2300)));
-//		logger.info("All Employess -> {}", employeeRepository.retrieveAllEmployees());
-
-		logger.info("Full Time Employess -> {}", employeeRepository.retrieveFullTimeEmployees());
-		logger.info("Part Time Employess -> {}", employeeRepository.retrievePartTimeEmployees());
+//		employeeRepository.insert(new FullTimeEmployee("Divya",new BigDecimal(900000)));
+//		employeeRepository.insert(new PartTimeEmployee("Sham",new BigDecimal(2300)));
+////		logger.info("All Employess -> {}", employeeRepository.retrieveAllEmployees());
+//
+//		logger.info("Full Time Employess -> {}", employeeRepository.retrieveFullTimeEmployees());
+//		logger.info("Part Time Employess -> {}", employeeRepository.retrievePartTimeEmployees());
 
 	}
 

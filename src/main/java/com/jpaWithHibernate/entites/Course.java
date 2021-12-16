@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-
 @NamedQueries(value = {
         @NamedQuery(name = "query_get_all_courses",
                 query = "Select  c  From Course c"),
@@ -28,7 +27,7 @@ import java.util.List;
 public class Course {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue
     private Long id;
     private String name;
 
@@ -61,6 +60,10 @@ public class Course {
         this.students.remove(students);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

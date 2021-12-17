@@ -24,6 +24,7 @@ import java.util.List;
                 query = "Select  c  From Course c JOIN FETCH c.students s") })
 
 @Entity
+@Cacheable
 public class Course {
 
     @Id

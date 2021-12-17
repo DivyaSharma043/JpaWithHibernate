@@ -33,7 +33,7 @@ class CourseSpringDataRepositoryTests {
 	CourseSpringDataRepository repository;
 
 	@Test
-	public void findById_CoursePresent()
+	public void findById()
 	{
 		Optional<Course> courseOptional = repository.findById(1L);
 		assertTrue(courseOptional.isPresent());
